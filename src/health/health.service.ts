@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../prisma/prisma.service';
 import { RedisService } from '../redis/redis.service';
 
@@ -12,6 +13,7 @@ export interface HealthResponse {
   status: 'ok' | 'error';
   timestamp: string;
   uptime: number;
+  frontendOrigin: string;
   checks: {
     database: HealthCheck;
     redis: HealthCheck;
@@ -23,6 +25,7 @@ export class HealthService {
   private readonly logger = new Logger(HealthService.name);
 
   constructor(
+    private readonly configService: ConfigService,
     private readonly prisma: PrismaService,
     private readonly redis: RedisService,
   ) {}
@@ -44,6 +47,7 @@ export class HealthService {
       status,
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
+      frontendOrigin: this.configService.get<string>('app.frontendOrigin') ?? 'not set',
       checks: { database, redis },
     };
   }
