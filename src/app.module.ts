@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { LoggerModule } from 'nestjs-pino';
 import { AppConfigModule } from './config/config.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { RedisModule } from './redis/redis.module';
@@ -14,6 +15,7 @@ import { StorageModule } from './storage/storage.module';
 
 @Module({
   imports: [
+    LoggerModule.forRoot(),
     AppConfigModule,
     ThrottlerModule.forRoot({
       throttlers: [
