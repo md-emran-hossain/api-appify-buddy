@@ -20,10 +20,7 @@ export class OwnershipGuard implements CanActivate {
     const params = request.params;
     const body = request.body;
 
-    const resourceType = body?._resourceType as
-      | 'post'
-      | 'comment'
-      | undefined;
+    const resourceType = body?._resourceType as 'post' | 'comment' | undefined;
 
     if (!resourceType) {
       return true;

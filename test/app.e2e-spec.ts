@@ -82,7 +82,9 @@ describe('App (e2e)', () => {
           const cookies = res.headers['set-cookie'] as unknown as string[];
           expect(cookies).toBeDefined();
           expect(cookies.some((c) => c.startsWith('access_token='))).toBe(true);
-          expect(cookies.some((c) => c.startsWith('refresh_token='))).toBe(true);
+          expect(cookies.some((c) => c.startsWith('refresh_token='))).toBe(
+            true,
+          );
         });
     });
 
