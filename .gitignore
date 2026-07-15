@@ -5,3 +5,7 @@ dist
 /generated/prisma
 coverage
 *.log
+*.tsbuildinfo
+prisma.config.js
+prisma.config.js.map
+prisma.config.d.ts
